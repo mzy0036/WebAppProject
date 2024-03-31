@@ -1,4 +1,75 @@
-# WebAppProject                                                                                                                                                 
-Title: K-12 Math Education Online Website.  
-Problem Statement: Design website using JSP, Servlet, XML and MySQL.                                                                                          
-Purpose and Scope: Design an online math education website to help K-12 student better receive math education for K-12 users.  
+# K-12 Math Education Online Website
+**Authors:**
+- Mengjin Ye (mzy0036)
+- Taylor Newton (tjn0012)
+- Edward Riley (emr0085)
+
+## Synopsis
+- **Problem Statement:** Design website using JSP, Servlet, XML, and MySQL.                                                                                          
+- **Purpose and Scope:** Design an online math education website to help K-12 student better receive math education for K-12 users.  
+
+
+## 1. Introduction
+Today, children learn in various ways. In addition to in-person school, they utilize online learning to master knowledge easily and efficiently. The main purpose of this project is to design an online math education website that will help K-12 students receive an improved math education.
+
+## 2. Description
+**K-12 Math Education (KME)** is a proven online learning platform that helps students master course topics through a continuous cycle of mastery, knowledge retention, and positive feedback.
+
+Additionally, KME helps educators and parents understand each student's knowledge and learning progress in depth and provides the unique support required for every student to achieve mastery.
+
+**Target Audience:** 
+- **Primary Education:** Students and faculties in kindergarten through 6th grade.
+- **Secondary Education:** Students and faculties in 7th grade through 12th grade.
+
+**User Role Type Actions:** 
+- **Teacher (Educator):** sets up courses, grades students, and provides online tutoring.
+- **General user (Student):** enrolls and manages courses, take quizzes, and asks for assistance through the chatting room or forum.
+
+**Two Categories Supported Courses:** 
+- Algebra
+- Geometry
+
+## 3. Core Functionalities
+**General Functionalities:**
+- User Login: provides different login pages and functions based on user type.
+
+**Faculty Functionalities:** 
+- Teacher Course Management: creates new online lessons and quizzes and uploads syllabus.
+- Teacher Student Management: edit registered students and grade student quizzes.
+- Teacher-Student Support: Supports student to connect with their teachers and reach out for extra help through chatting room. 
+
+**Student Functionalities:**
+- General User Enrollment: Students are permitted to enroll in courses.
+- General User Post Enrollment: Students can take online courses and corresponding quizzes.
+- Independent Learning Courses: Students can choose personal learning courses without teachers.
+- Student Interactivity: 
+  - Students can post questions on the web page, and other students or teachers can reply and answer them.
+  - Supports students to join interactive discussions about their courses through the chatting room.
+
+## 4. Technical Architecture
+
+**Stack Architecture:**
+Developed using Java Servlets, JSP templates, JDBC driver, and MySQL database.
+
+**Java Server Pages:**
+- Applications can use Java Server Pages (JSP) to implement web pages. JSP is a servlet that mixes static content (such as HTML) and Java code definitions.
+
+**URL+XML Pathing:**
+- Web.xml defines the mapping between URL paths and servlets that handle requests through those paths. The web server uses this configuration to determine the servlet to handle a given request and to invoke the class method that corresponds to the request method (such as the doGet() method of an HTTP GET request). 
+- To map a URL to a servlet, you declare the servlet with the `<servlet>` element and then define the mapping from the URL path to the servlet declaration via the `<servlet-mapping>` element.
+- JSP is compiled into a servlet class automatically, and mapped to the URL path equivalent to the path to the JSP file.
+
+**MySQL Database:**
+- MySQL is a widely used, open-source relational database management system. We can use it to store users’ registered information.
+
+## 5. Potential Challenges 
+- Because different types of users have different purposes, different functions need to be designed for the same web page.
+- The server side receiving user requests, calling database data, jumping to different pages, and managing functions may be our biggest problem.
+- There could be unforeseen authentication issues.
+- When the JSP File is converted to Servlet and if the JSP service method size exceeds a limit of 64K bytes, the JSP file will not compile, throwing the below error.
+
+## 6. Timelines
+Now ~ 4.2 Project Proposal
+
+## 7. Deliverers
+GitHub: [https://github.com/mzy0036/WebAppProject.git](https://github.com/mzy0036/WebAppProject.git)
