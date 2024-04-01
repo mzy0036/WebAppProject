@@ -7,6 +7,7 @@ Purpose and Scope: Design an online math education website to help K-12 student 
 - Mengjin Ye (mzy0036)
 - Taylor Newton (tjn0012)
 - Edward Riley (emr0085)
+- Austin Rowell (arr0099)
 
 ## Synopsis
 - **Problem Statement:** Design website using JSP, Servlet, XML, and MySQL.                                                                                          
@@ -38,9 +39,10 @@ Additionally, KME helps educators and parents understand each student's knowledg
 - User Login: provides different login pages and functions based on user type.
 
 **Faculty Functionalities:** 
-- Teacher Course Management: creates new online lessons and quizzes and uploads syllabus.
-- Teacher Student Management: edit registered students and grade student quizzes.
+- Teacher Course Management: Creates new online lessons and quizzes and uploads syllabus.
+- Teacher Student Management: Edit registered students and grade student quizzes.
 - Teacher-Student Support: Supports student to connect with their teachers and reach out for extra help through chatting room. 
+- Teacher-Student Support: Supports sending out annoucements to enrolled students
 
 **Student Functionalities:**
 - General User Enrollment: Students are permitted to enroll in courses.
