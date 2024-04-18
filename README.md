@@ -88,12 +88,12 @@ MySQL is a widely used, open-source relational database management system. We ca
 ![High Level Architecture](docs/img/High%20Level%20Architecture%20-%20MVC.png)
 
 ## 5. Timelines
-4/10/2024 ~ 4.2 Project Proposal
-4/18/2024 ~ Technical Proposal 
-4/22/2024 ~ Complete Login page and Functionality and set up Database
-4/26/2024 ~ Complete Teacher Functionality 
-5/02/2024 ~ Complete Student Functionality
-5/03/2024 ~ Review and Final Submission
+4/10/2024 ~ 4.2 Project Proposal<br />
+4/18/2024 ~ Technical Proposal <br />
+4/22/2024 ~ Complete Login page and Functionality and set up Database<br />
+4/26/2024 ~ Complete Teacher Functionality <br />
+5/02/2024 ~ Complete Student Functionality<br />
+5/03/2024 ~ Review and Final Submission<br />
 
 ## 6. Potential Challenges 
 - Because different types of users have different purposes, different functions need to be designed for the same web page.
