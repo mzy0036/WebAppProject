@@ -87,14 +87,20 @@ MySQL is a widely used, open-source relational database management system. We ca
 ### High Level Architecture
 ![High Level Architecture](docs/img/High%20Level%20Architecture%20-%20MVC.png)
 
-## 5. Potential Challenges 
+## 5. Timelines
+4/10/2024 ~ 4.2 Project Proposal
+4/18/2024 ~ Technical Proposal 
+4/22/2024 ~ Complete Login page and Functionality and set up Database
+4/26/2024 ~ Complete Teacher Functionality 
+5/02/2024 ~ Complete Student Functionality
+5/03/2024 ~ Review and Final Submission
+
+## 6. Potential Challenges 
 - Because different types of users have different purposes, different functions need to be designed for the same web page.
 - The server side receiving user requests, calling database data, jumping to different pages, and managing functions may be our biggest problem.
 - There could be unforeseen authentication issues.
 - When the JSP File is converted to Servlet and if the JSP service method size exceeds a limit of 64K bytes, the JSP file will not compile, throwing the below error.
 
-## 6. Timelines
-Now ~ 4.2 Project Proposal
 
 ## 7. Deliverers
 GitHub: [https://github.com/mzy0036/WebAppProject.git](https://github.com/mzy0036/WebAppProject.git)
