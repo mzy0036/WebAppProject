@@ -83,6 +83,8 @@ Git version control helps programmers keep track of changes they make to their c
 
 ### MySQL Database:
 MySQL is a widely used, open-source relational database management system. We can use it to store users’ registered information. This makes MySQL A robust, open-source relational database management system for storing and managing data, such as user registration details. Web applications with MySQL can efficiently handle large volumes of data with high reliability and security, ensuring user information is both accessible and protected.
+<img width="834" alt="截屏2024-04-19 下午2 47 58" src="https://github.com/mzy0036/WebAppProject/assets/38323190/805b8d4b-f76d-4c66-b5e0-f9916a0fc007">
+
 
 ### High Level Architecture
 ![High Level Architecture](docs/img/High%20Level%20Architecture%20-%20MVC.png)
