@@ -15,6 +15,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
+import org.xml.sax.InputSource;
+import java.io.StringReader;
+
 
 // Converts all SQL Queries to XML.
 public class ResultSetToXMLConverter {
@@ -59,6 +62,17 @@ public class ResultSetToXMLConverter {
             StringWriter writer = new StringWriter();
             transformer.transform(new DOMSource(doc), new StreamResult(writer));
             return writer.getBuffer().toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Document convertStringToXMLDocument(String xmlStr) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            return builder.parse(new InputSource(new StringReader(xmlStr)));
         } catch (Exception e) {
             e.printStackTrace();
             return null;

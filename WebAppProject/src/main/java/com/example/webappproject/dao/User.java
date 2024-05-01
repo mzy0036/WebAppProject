@@ -37,17 +37,6 @@ public class User {
         }
     }
 
-    public static String getUserInformation(String username) throws SQLException, ClassNotFoundException, ParserConfigurationException {
-        try (Connection conn = MySQLConnection.getConnection()) {
-            String sql = "SELECT firstname, lastname, user_id FROM user WHERE username = ?";
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, username);
-                return ResultSetToXMLConverter.executeQueryToXML(pstmt);
-            }
-        }
-    }
-
-
     public static String createUser(String firstName, String lastName, String username, String password, String email, String role) throws SQLException, ClassNotFoundException, ParserConfigurationException {
         try (Connection conn = MySQLConnection.getConnection()) {
             String insertSql = "INSERT INTO user (firstname, lastname, username, password, email, role) VALUES (?, ?, ?, ?, ?, ?)";
@@ -90,6 +79,43 @@ public class User {
             root.appendChild(message);
 
             return XMLtoString(doc);
+        }
+    }
+
+    public static String getUserById(int userId) throws SQLException, ClassNotFoundException, ParserConfigurationException {
+        try (Connection conn = MySQLConnection.getConnection()) {
+            String sql = "SELECT user_id, firstname, lastname, email, role FROM user WHERE user_id = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, userId);
+                return ResultSetToXMLConverter.executeQueryToXML(pstmt);
+            }
+        }
+    }
+
+    public static String getAllUsers() throws SQLException, ClassNotFoundException, ParserConfigurationException {
+        try (Connection conn = MySQLConnection.getConnection()) {
+            String sql = "SELECT user_id, firstname, lastname, email, role FROM user";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                return ResultSetToXMLConverter.executeQueryToXML(pstmt);
+            }
+        }
+    }
+
+    public static String getAllTeachers() throws SQLException, ClassNotFoundException, ParserConfigurationException {
+        try (Connection conn = MySQLConnection.getConnection()) {
+            String sql = "SELECT user_id, firstname, lastname, email, role FROM user WHERE role = 'teacher'";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                return ResultSetToXMLConverter.executeQueryToXML(pstmt);
+            }
+        }
+    }
+
+    public static String getAllStudents() throws SQLException, ClassNotFoundException, ParserConfigurationException {
+        try (Connection conn = MySQLConnection.getConnection()) {
+            String sql = "SELECT user_id, firstname, lastname, email, role FROM user WHERE role = 'student'";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                return ResultSetToXMLConverter.executeQueryToXML(pstmt);
+            }
         }
     }
 }
