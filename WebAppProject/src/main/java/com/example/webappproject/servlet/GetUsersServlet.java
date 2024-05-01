@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "getUsers", value = "/api/users/*")
-public class GetUsers extends HttpServlet {
+public class GetUsersServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/xml;charset=UTF-8");
