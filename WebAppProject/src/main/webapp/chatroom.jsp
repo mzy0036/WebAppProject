@@ -88,7 +88,7 @@
             let value ='senderID='+1+'receiverID='+-1+'content=test';
 
             $.ajax({
-                url: "WebAppProject/MessageServlet",
+                url: "MessageServlet",
                 type: "post",
                 data: value,
                 cache: false,
