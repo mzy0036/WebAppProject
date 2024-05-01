@@ -48,15 +48,16 @@ public class User {
     }
 
 
-    public static String createUser(String firstName, String lastName, String username, String password, String email) throws SQLException, ClassNotFoundException, ParserConfigurationException {
+    public static String createUser(String firstName, String lastName, String username, String password, String email, String role) throws SQLException, ClassNotFoundException, ParserConfigurationException {
         try (Connection conn = MySQLConnection.getConnection()) {
-            String insertSql = "INSERT INTO user (firstname, lastname, username, password, email) VALUES (?, ?, ?, ?, ?)";
+            String insertSql = "INSERT INTO user (firstname, lastname, username, password, email, role) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
                 pstmt.setString(1, firstName);
                 pstmt.setString(2, lastName);
                 pstmt.setString(3, username);
                 pstmt.setString(4, password);
                 pstmt.setString(5, email);
+                pstmt.setString(6, role);
                 int result = pstmt.executeUpdate();
 
                 // Create XML document to return
