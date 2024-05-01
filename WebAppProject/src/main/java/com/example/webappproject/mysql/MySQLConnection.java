@@ -3,19 +3,34 @@ package com.example.webappproject.mysql;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class MySQLConnection {
-    // MySQL Database hosted on Digital Ocean service.
-    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://kme-do-user-14128544-0.c.db.ondigitalocean.com:25060/kme";
+    // Add the .env to the C:\Program Files (x86)\Apache Software Foundation\Tomcat 10.1\bin directory.
+    private static final String ENV_FILE = ".env";
 
-    // Database credentials - doadmin:AVNS_qujJSrFoEOCbFd6EXD- for local/academic testing anyway.
-    private static final String USER = "doadmin";
-    private static final String PASS = "AVNS_qujJSrFoEOCbFd6EXD-";
-
-    public static Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
-        return DriverManager.getConnection(DB_URL, USER, PASS);
+    private static Properties loadProperties() throws IOException {
+        Properties props = new Properties();
+        try (FileInputStream in = new FileInputStream(ENV_FILE)) {
+            props.load(in);
+        }
+        return props;
     }
 
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+        try {
+            Properties props = loadProperties();
+            String driver = props.getProperty("JDBC_DRIVER");
+            String url = props.getProperty("DB_URL");
+            String user = props.getProperty("USER");
+            String pass = props.getProperty("PASS");
+
+            Class.forName(driver);
+            return DriverManager.getConnection(url, user, pass);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load properties from .env file at expected location: " + new java.io.File(ENV_FILE).getAbsolutePath(), e);
+        }
+    }
 }
