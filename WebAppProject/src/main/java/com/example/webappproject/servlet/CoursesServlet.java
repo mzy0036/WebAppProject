@@ -29,6 +29,10 @@ public class CoursesServlet extends HttpServlet {
                 // Get courses for a specific teacher
                 int teacherId = Integer.parseInt(pathInfo.substring("/teacher/".length()));
                 coursesXml = Course.getCourseByTeacherId(teacherId);
+            } else if (pathInfo.startsWith("/student/")) {
+                // Get courses for a specific student
+                int studentId = Integer.parseInt(pathInfo.substring("/student/".length()));
+                coursesXml = Course.getCoursesByStudentId(studentId);
             } else {
                 // Invalid path
                 coursesXml = "<Error><Message>Invalid request</Message></Error>";

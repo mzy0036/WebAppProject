@@ -10,9 +10,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.example.webappproject.mysql.ResultSetToXMLConverter.XMLtoString;
+import static com.example.webappproject.mysql.ResultSetToXMLConverter.convertStringToXMLDocument;
 
 public class Course {
     public static String getAllCourses() throws SQLException, ClassNotFoundException, ParserConfigurationException {
@@ -43,6 +45,36 @@ public class Course {
             }
         }
     }
+
+    public static String getCoursesByStudentId(int studentId) throws SQLException, ClassNotFoundException, ParserConfigurationException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.newDocument();
+        Element root = doc.createElement("Courses");
+        doc.appendChild(root);
+
+        try (Connection conn = MySQLConnection.getConnection()) {
+            String sql = "SELECT course_id FROM teacher_student_lookup WHERE student_id = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, studentId);
+                ResultSet rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+                    int courseId = rs.getInt("course_id");
+                    String courseXml = getCoursesById(courseId); // Fetch fuller course content
+                    Document courseDoc = convertStringToXMLDocument(courseXml);
+
+                    // Assuming courseDoc is correctly formed and has a root element
+                    assert courseDoc != null;
+                    Element courseElement = (Element) courseDoc.getDocumentElement().cloneNode(true);
+                    doc.adoptNode(courseElement);
+                    root.appendChild(courseElement);
+                }
+            }
+        }
+        return XMLtoString(doc);
+    }
+
 
     public static String createCourse(String courseNumber, String courseName, String description, int teacherId) throws SQLException, ClassNotFoundException, ParserConfigurationException {
         try (Connection conn = MySQLConnection.getConnection()) {
@@ -87,6 +119,4 @@ public class Course {
             return XMLtoString(doc);
         }
     }
-
-
 }
