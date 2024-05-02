@@ -108,7 +108,7 @@ button:hover {
     margin-right: 5px;
 }
 
-#courseTable {
+#styledTable {
     font-family: 'Roboto', sans-serif;
     border-collapse: collapse;
     width: 90%;
@@ -116,16 +116,16 @@ button:hover {
     margin-top:1rem;
 }
 
-#courseTable td, #courseTable th {
+#styledTable td, #styledTable th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#courseTable tr:nth-child(even){background-color: #f2f2f2;}
+#styledTable tr:nth-child(even){background-color: #f2f2f2;}
 
-#courseTable tr:hover {background-color: #ddd;}
+#styledTable tr:hover {background-color: #ddd;}
 
-#courseTable th {
+#styledTable th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -133,5 +133,9 @@ button:hover {
     color: white;
 }
 #selectDiv{
+    text-align: center;
+}
+
+.about-description {
     text-align: center;
 }

@@ -1,25 +1,21 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: notst
-  Date: 5/2/2024
-  Time: 10:45 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.webappproject.dao.User" %>
+<%@ page import="javax.xml.parsers.*, org.w3c.dom.*, java.io.*" %>
+<%@ page import="org.xml.sax.InputSource" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Math Education - Registration</title>
+    <title>Online Math Education - Teachers</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <main>
     <section class="banner">
-        <h1>Welcome to Online Math Education for K-12</h1>
-        <p>Explore the World of Math</p>
+        <h1>Teachers List</h1>
+        <p>Meet Our Qualified Teachers</p>
     </section>
 </main>
 <header>
@@ -32,38 +28,44 @@
         </ul>
     </nav>
 </header>
-<script>
-    teachersXml = User.getAllTeachers();
-    let table = document.getElementById("teacherTable");
-    table.innerHTML = "";
+<article>
+    <table id="styledTable">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        <%
+            String teachersXml = "";
+            try {
+                teachersXml = User.getAllTeachers();
 
-    const headerRow = document.createElement("tr");
-    const headers = ["First Name", "Last Name", "Email"];
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.parse(new InputSource(new StringReader(teachersXml)));
+                NodeList nList = doc.getElementsByTagName("Row");
 
-    headers.forEach((header) => {
-        const th = document.createElement("th");
-        th.textContent = header;
-        headerRow.appendChild(th);
-    });
-
-    table.appendChild(headerRow);
-    teachersXml.childNodes.forEach((teachersXml) => {
-        const row = document.createElement("tr");
-        const cells = [
-            teachersXml.getElementsByTagName("firstname")[0].textContent,
-            teachersXml.getElementsByTagName("lastname")[0].textContent,
-            teachersXml.getElementsByTagName("email")[0].textContent,
-        ];
-
-        cells.forEach((cell) => {
-            const td = document.createElement("td");
-            td.textContent = cell;
-            row.appendChild(td);
-        });
-
-        table.appendChild(row);
-    });
-</script>
-<table id="teacherTable"></table>
+                for (int temp = 0; temp < nList.getLength(); temp++) {
+                    Node nNode = nList.item(temp);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        String firstname = eElement.getElementsByTagName("firstname").item(0).getTextContent();
+                        String lastname = eElement.getElementsByTagName("lastname").item(0).getTextContent();
+                        String email = eElement.getElementsByTagName("email").item(0).getTextContent();
+        %>
+        <tr>
+            <td><%= firstname %></td>
+            <td><%= lastname %></td>
+            <td><%= email %></td>
+        </tr>
+        <%
+                    }
+                }
+            } catch (Exception e) {
+                out.println("<tr><td colspan='4'>Error retrieving teachers: " + e.getMessage() + "</td></tr>");
+            }
+        %>
+    </table>
+</article>
 </body>
 </html>

@@ -46,7 +46,7 @@
     }
 
     function updateCoursesTable(courses) {
-        let table = document.getElementById("courseTable")
+        let table = document.getElementById("styledTable")
         table.innerHTML = "";
 
         const headerRow = document.createElement("tr");
@@ -78,6 +78,6 @@
     }
     document.addEventListener("DOMContentLoaded", fetchCourses);
 </script>
-<table id="courseTable"></table>
+<table id="styledTable"></table>
 </body>
 </html>

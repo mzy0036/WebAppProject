@@ -33,7 +33,7 @@
 </header>
 <div class="signin-form">
     <h2>Register</h2>
-    <form action="api/signup" method="post" class="form-style">
+    <form id="registerForm" action="api/signup" method="post" class="form-style">
         <div class="form-group">
             First Name: <input name="firstName" type="text" required>
         </div>
@@ -53,9 +53,53 @@
             Student <input type="radio" name="role" value="student">
             Teacher <input type="radio" name="role" value="teacher">
         </div>
-        <button type="submit">Register</button>
+        <button id="registerButton" type="submit">Register</button>
     </form>
 </div>
+<script>
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Disable the submit button to prevent multiple submissions
+        document.getElementById("registerButton").disabled = true;
+
+        // Get form data
+        var formData = new URLSearchParams(new FormData(document.getElementById("registerForm")));
+
+        // Send form data asynchronously using AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "api/signup");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Parse XML response
+                    var xmlDoc = xhr.responseXML;
+                    var status = xmlDoc.getElementsByTagName("Status")[0].textContent;
+
+                    // Handle response based on status
+                    if (status === "Success") {
+                        // Redirect user to a different page upon successful login
+                        alert("Success!");
+                        window.location.href = 'index.jsp';
+                    } else {
+                        // Handle invalid login
+                        alert("Invalid username or password.");
+                        // Enable the submit button
+                        document.getElementById("registerButton").disabled = false;
+                    }
+                } else {
+                    // Handle AJAX error
+                    alert("Error occurred. Please try again later.");
+                    // Enable the submit button
+                    document.getElementById("registerButton").disabled = false;
+                }
+            }
+        };
+        xhr.send(formData);
+    });
+</script>
 </body>
 </html>
 
