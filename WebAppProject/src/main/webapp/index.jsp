@@ -8,13 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Index</title>
+    <title>Login</title>
 </head>
 <body>
     <form action="api/login" method="post">
         Username: <input name="username" type="text" required> <br/>
         Password: <input name="password" type="password" required> <br/>
         <input type="submit" name="Login">
+        <a href="register.jsp">Register</a>
     </form>
 </body>
 </html>
