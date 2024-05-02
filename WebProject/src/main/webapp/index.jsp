@@ -32,7 +32,7 @@
         <li><a href="index.jsp">HOME</a></li>
         <li><a href="CourseReg.jsp">Online Courses</a></li>
         <li><a href="PersonalLearning.jsp">Personalized Learning 6-12</a></li>
-        <li><a href="#Support">Support</a></li>
+        <li><a href="support.jsp">Support</a></li>
         <li><a href="chatroom.jsp">Chat Room</a></li>
         <li><a href="login.jsp" class="button" style="background-color:lightblue;margin-left:300px">Sign in</a></li>
         <li><a href="Registration.jsp" class="button" style="background-color:lightblue; margin-left:30px">Sign up</a></li>
@@ -96,7 +96,7 @@
 </footer>
 
 
-<div class="footer">Copyright © 2022. All Rights Reserved</div>
+<div class="footer">Copyright © 2024. All Rights Reserved</div>
 </body>
 
 </html>

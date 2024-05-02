@@ -6,8 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LEAP Education</title>
-
-
 </head>
 <header>
 
@@ -32,7 +30,7 @@
     <li><a href="index.jsp">HOME</a></li>
     <li><a href="CourseReg.jsp">Online Courses</a></li>
     <li><a href="PersonalLearning.jsp">Personalized Learning 6-12</a></li>
-    <li><a href="support.jsp">Support</a></li>
+    <li><a href="#Support">Support</a></li>
     <li><a href="chatroom.jsp">Chat Room</a></li>
     <li><a href="login.jsp" class="button" style="background-color:lightblue;margin-left:300px">Sign in</a></li>
     <li><a href="Registration.jsp" class="button" style="background-color:lightblue; margin-left:30px">Sign up</a></li>
@@ -40,21 +38,40 @@
   </ul>
 </div>
 
+<form class="" action="index.html" method="POST" style="text-align: center; margin-left: auto;">
+  <p style="color:blueviolet">Leave a message for help</p>
 
-<form class="" action="index.jsp" method="post"
-      style="text-align: center; margin-left: auto; background-color: lightblue;">
-  <label for="username">Username</label>
-  <input id="username" type="text" value="" required><br><br>
-  <label for="email">Email</label>
-  <input id="email" type="text" name="email" placeholder="Your Email Address" required><br><br>
-  <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password" required
-         pattern="{6,12}" title="write a 6-12 characters"><br><br>
-  <label for="age">Age</label>
-  <input id="age" type="text" name="age" placeholder="Your Email Address" required><br><br>
-  <label for="address">Address</label>
-  <input id="address" name="address" placeholder="Your address" required>
+  <p>Topic: <input type="text" name=""></p><br>
+
+  <div>
+    <label>Question type:</label>
+    <select name="app" id="app-select">
+      <option value="">--Please choose an app--</option>
+      <option value="">Assignment</option>
+      <option value="">Quiz</option>
+    </select>
+  </div> <br><br>
+
+  </div>
+  <label>Choose Class:</label>
+  <select name="class" id="class-select">
+    <option value="">--Please choose class--</option>
+    <option value="class">Algebra</option>
+    <option value="class">Geometry</option>
+    <option value="class">Others</option>
+  </select>
+  <p>Release Date:<input type="date" name="" placeholder="Release Date">&nbsp&nbsp
+    <input type="time" name="" placeholder="Time">
+  <p>Due Date:<input type="date" name="" placeholder="Due Date">&nbsp&nbsp
+    <input type="time" name="" placeholder="Time">
+  </p>
+  <p>Content: <input type="text" placeholder="Please post here" style="height:200px; width:300px"></p>
+  <br><br>
+
+  <input type="submit" name="" value="Post" onclick="validate()">
+  </div> <br><br>
+
 </form>
-<div class="footer">Copyright © 2024. All Rights Reserved</div>
 </body>
 </html>
+
