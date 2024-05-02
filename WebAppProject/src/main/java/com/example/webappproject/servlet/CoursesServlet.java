@@ -1,5 +1,6 @@
 package com.example.webappproject.servlet;
 
+import com.example.webappproject.dao.Assignment;
 import com.example.webappproject.dao.Course;
 
 import jakarta.servlet.http.*;
@@ -21,21 +22,28 @@ public class CoursesServlet extends HttpServlet {
             if (pathInfo == null || pathInfo.equals("/")) {
                 // Get all courses
                 coursesXml = Course.getAllCourses();
-            } else if (pathInfo.matches("/\\d+")) { // Regex to match a path that is exactly one or more digits
-                // Get individual course by ID
-                int courseId = Integer.parseInt(pathInfo.substring(1)); // Extract course ID from path
-                coursesXml = Course.getCoursesById(courseId);
-            } else if (pathInfo.startsWith("/teacher/")) {
-                // Get courses for a specific teacher
-                int teacherId = Integer.parseInt(pathInfo.substring("/teacher/".length()));
-                coursesXml = Course.getCourseByTeacherId(teacherId);
-            } else if (pathInfo.startsWith("/student/")) {
-                // Get courses for a specific student
-                int studentId = Integer.parseInt(pathInfo.substring("/student/".length()));
-                coursesXml = Course.getCoursesByStudentId(studentId);
             } else {
-                // Invalid path
-                coursesXml = "<Error><Message>Invalid request</Message></Error>";
+                String[] pathParts = pathInfo.split("/");
+                if (pathParts.length == 2 && pathParts[1].matches("\\d+")) { // Regex to match a path that is exactly one or more digits
+                    // Get individual course by ID
+                    int courseId = Integer.parseInt(pathParts[1]); // Extract course ID from path
+                    coursesXml = Course.getCoursesById(courseId);
+                } else if (pathParts.length == 3 && pathParts[1].matches("\\d+") && "assignments".equals(pathParts[2])) {
+                    // Get all assignments for a course
+                    int courseId = Integer.parseInt(pathParts[1]); // Extract course ID from path
+                    coursesXml = Assignment.getAssignmentsByCourseId(courseId, false); // Adjust this method if it requires more parameters
+                } else if (pathParts.length == 3 && "teacher".equals(pathParts[1])) {
+                    // Get courses for a specific teacher
+                    int teacherId = Integer.parseInt(pathParts[2]);
+                    coursesXml = Course.getCourseByTeacherId(teacherId);
+                } else if (pathParts.length == 3 && "student".equals(pathParts[1])) {
+                    // Get courses for a specific student
+                    int studentId = Integer.parseInt(pathParts[2]);
+                    coursesXml = Course.getCoursesByStudentId(studentId); // You'll need to implement this if it's required
+                } else {
+                    // Invalid path
+                    coursesXml = "<Error><Message>Invalid request</Message></Error>";
+                }
             }
             response.getWriter().write(coursesXml);
         } catch (SQLException | ClassNotFoundException | ParserConfigurationException e) {
