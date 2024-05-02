@@ -1,0 +1,5 @@
+/* 设置文本框获得焦点时的样式 */
+.box input[type="text"]:focus,.box input[type="password"]:focus{
+    width: 280px;
+    border-color: #2ecc71;
+}

@@ -1,0 +1,32 @@
+.box{
+    width: 800px;
+    height: 500px;
+    padding: 100px;
+    position: absolute;   /* 绝对定位，相对于父标签来进行定位 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%); 
+    background: hwb(172 78% 7%);
+    /*表单中内容居中*/
+    
+}
+.box h1{
+    color: rgb(0, 0, 0);    /* 设置字体颜色 */
+    text-transform: uppercase;  /* 将字体全部设置成大写字母  */
+    font-weight: 600;  /*  设置字体粗细   */
+}
+
+/* 按钮 */
+.box input[type="submit"]{
+    border-radius: 60px;
+    border: 2px solid #000000;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    padding: 14px 40px;
+    outline: none;
+    color: rgb(37, 92, 171);     /* 设置输入框中竖线的颜色 */
+    transition: 0.25s;
+    cursor: pointer;    /* 设置光标的样式 */
+  }

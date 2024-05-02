@@ -1,0 +1,4 @@
+/* 设置鼠标移人到按钮上的样式 */
+.box input[type="submit"]:hover{
+    background: #2ecc71;
+}

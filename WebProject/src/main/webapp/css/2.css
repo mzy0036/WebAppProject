@@ -1,0 +1,14 @@
+/* 给整个表单设置宽度高度是根据表单中的内容自行收缩的，
+并设置定位让整个表单居于页面正中间 */
+.box{
+    width: 800px;
+    padding: 100px;
+    position: absolute;   /* 绝对定位，相对于父标签来进行定位 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%); 
+    background: hwb(0 100% 0%);
+    text-align: center;  /*表单中内容居中*/
+    
+}
+

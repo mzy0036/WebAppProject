@@ -1,0 +1,12 @@
+/* 设置标题样式 */
+.box h1{
+    color: rgb(122, 194, 178);    /* 设置字体颜色 */
+    text-transform: uppercase;  /* 将字体全部设置成大写字母  */
+    font-weight: 600;  /*  设置字体粗细   */
+}
+.box h2{
+    color: rgb(122, 194, 178);    /* 设置字体颜色 */
+    text-transform: uppercase;  /* 将字体全部设置成大写字母  */
+    font-weight: 600;  /*  设置字体粗细   */
+}
+
