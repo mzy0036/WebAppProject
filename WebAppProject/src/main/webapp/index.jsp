@@ -11,7 +11,7 @@
     <title>Index</title>
 </head>
 <body>
-    <form action="LoginServlet" method="post">
+    <form action="api/login" method="post">
         Username: <input name="username" type="text" required> <br/>
         Password: <input name="password" type="password" required> <br/>
         <input type="submit" name="Login">
