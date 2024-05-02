@@ -1,6 +1,7 @@
 package com.example.webappproject.servlet;
 
 import com.example.webappproject.dao.Assignment;
+import com.example.webappproject.dao.Question;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -16,23 +17,32 @@ public class AssignmentsServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/xml;charset=UTF-8");
-        boolean onlyActiveBoolean = Boolean.parseBoolean(request.getParameter("onlyActive"));
+        boolean onlyActive = Boolean.parseBoolean(request.getParameter("onlyActive"));
+        boolean includeAnswers = Boolean.parseBoolean(request.getParameter("includeAnswers"));
+        boolean indicateCorrectAnswers = Boolean.parseBoolean(request.getParameter("indicateCorrectAnswers"));
 
         String pathInfo = request.getPathInfo(); // Get the path info to determine the specific request
         try {
-            String coursesXml;
+            String assignmentsXml;
             if (pathInfo == null || pathInfo.equals("/")) {
                 // Get all assignments
-                coursesXml = Assignment.getAllAssignments(onlyActiveBoolean);
-            } else if (pathInfo.matches("/\\d+")) { // Regex to match a path that is exactly one or more digits
-                // Get individual assignment by ID
-                int assignmentId = Integer.parseInt(pathInfo.substring(1)); // Extract course ID from path
-                coursesXml = Assignment.getAssignmentById(assignmentId);
+                assignmentsXml = Assignment.getAllAssignments(onlyActive);
             } else {
-                // Invalid path
-                coursesXml = "<Error><Message>Invalid request</Message></Error>";
+                String[] pathParts = pathInfo.split("/");
+                if (pathParts.length == 2 && pathParts[1].matches("\\d+")) {
+                    // Get individual assignment by ID or questions for the assignment
+                    int assignmentId = Integer.parseInt(pathParts[1]); // Extract assignment ID from path
+                    assignmentsXml = Assignment.getAssignmentById(assignmentId);
+                } else if (pathParts.length == 3 && pathParts[1].matches("\\d+") && "questions".equals(pathParts[2])) {
+                    // Get all questions for a specific assignment
+                    int assignmentId = Integer.parseInt(pathParts[1]); // Extract assignment ID from path
+                    assignmentsXml = Question.getAllQuestionByAssignmentId(assignmentId, includeAnswers, indicateCorrectAnswers);
+                } else {
+                    // Invalid path
+                    assignmentsXml = "<Error><Message>Invalid request</Message></Error>";
+                }
             }
-            response.getWriter().write(coursesXml);
+            response.getWriter().write(assignmentsXml);
         } catch (SQLException | ClassNotFoundException | ParserConfigurationException e) {
             response.getWriter().write("<Error><Message>" + e.getMessage() + "</Message></Error>");
         }
