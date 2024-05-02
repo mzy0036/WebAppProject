@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-241.14494.240">
+    <data-source name="kme@kme-do-user-14128544-0.c.db.ondigitalocean.com" uuid="6eb012d8-832b-43c7-9b82-878bc58a1fc3">
+      <database-info product="MySQL" version="8.0.30" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.0.30" exact-driver-version="8.2">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>doadmin</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="@" />
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+  </component>
+</project>
