@@ -107,3 +107,7 @@ MySQL is a widely used, open-source relational database management system. We ca
 
 ## 7. Deliverers
 GitHub: [https://github.com/mzy0036/WebAppProject.git](https://github.com/mzy0036/WebAppProject.git)
+
+
+## 8. References
+[Edward's API Servlet Documentation](https://github.com/mzy0036/WebAppProject/blob/main/WebAppProject/src/main/java/com/example/webappproject/README.md)
