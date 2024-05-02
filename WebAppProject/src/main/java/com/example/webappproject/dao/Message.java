@@ -12,6 +12,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import java.util.*;
 
 
 public class Message {
@@ -36,12 +37,14 @@ public class Message {
 
     public static String SendMessage(int senderID, int receiverID, String content) throws SQLException, ParserConfigurationException, ClassNotFoundException {
         try (Connection conn = MySQLConnection.getConnection()) {
-            String insertSql = "INSERT INTO messaages (SenderID, RecieverID, content, TimeSent) VALUES (?, ?, ?, ?)";
+            String insertSql = "INSERT INTO messages (SenderID, RecieverID, content, TimeSent) VALUES (?, ?, ?, ?)";
+            java.util.Date date = new java.util.Date();
+            Object currDate = new java.sql.Timestamp(date.getTime());
             try (PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
                 pstmt.setInt(1, senderID);
                 pstmt.setInt(2, receiverID);
                 pstmt.setString(3, content);
-                pstmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+                pstmt.setObject(4, currDate);
                 int result = pstmt.executeUpdate();
 
                 // Create XML document to return
