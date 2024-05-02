@@ -1,6 +1,7 @@
 package com.example.webappproject.servlet;
 
 import com.example.webappproject.dao.User;
+import com.example.webappproject.dao.Assignment;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "getUsers", value = "/api/users/*")
-public class GetUsersServlet extends HttpServlet {
+public class UsersServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/xml;charset=UTF-8");
@@ -20,19 +21,21 @@ public class GetUsersServlet extends HttpServlet {
             if (pathInfo == null || pathInfo.equals("/")) {
                 // Get all users
                 usersXml = User.getAllUsers();
-            } else if (pathInfo.equals("/teachers")) {
-                // Get all teachers
-                usersXml = User.getAllTeachers();
-            } else if (pathInfo.equals("/students")) {
-                // Get all students
-                usersXml = User.getAllStudents();
-            } else if (pathInfo.matches("/\\d+")) { // Regex to match a path that is exactly one or more digits
-                // Get individual user by ID
-                int userId = Integer.parseInt(pathInfo.substring(1)); // Extract user ID from path
-                usersXml = User.getUserById(userId);
             } else {
-                // Invalid path
-                usersXml = "<Error><Message>Invalid request</Message></Error>";
+                String[] pathParts = pathInfo.split("/");
+                if (pathParts.length == 2 && pathParts[1].matches("\\d+")) {
+                    // Get individual user by ID
+                    int userId = Integer.parseInt(pathParts[1]); // Extract user ID from path
+                    usersXml = User.getUserById(userId);
+                } else if (pathParts.length == 3 && pathParts[1].matches("\\d+") && "assignments".equals(pathParts[2])) {
+                    // Get all assignments for a specific user
+                    int userId = Integer.parseInt(pathParts[1]); // Extract user ID from path
+                    boolean onlyActive = false; // This can be set based on a query parameter or other business logic
+                    usersXml = Assignment.getAssignmentsByStudentId(userId, onlyActive);
+                } else {
+                    // Invalid path
+                    usersXml = "<Error><Message>Invalid request</Message></Error>";
+                }
             }
             response.getWriter().write(usersXml);
         } catch (SQLException | ClassNotFoundException | ParserConfigurationException e) {
