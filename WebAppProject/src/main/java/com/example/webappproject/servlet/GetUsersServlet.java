@@ -20,19 +20,21 @@ public class GetUsersServlet extends HttpServlet {
             if (pathInfo == null || pathInfo.equals("/")) {
                 // Get all users
                 usersXml = User.getAllUsers();
-            } else if (pathInfo.equals("/teachers")) {
-                // Get all teachers
-                usersXml = User.getAllTeachers();
-            } else if (pathInfo.equals("/students")) {
-                // Get all students
-                usersXml = User.getAllStudents();
-            } else if (pathInfo.matches("/\\d+")) { // Regex to match a path that is exactly one or more digits
-                // Get individual user by ID
-                int userId = Integer.parseInt(pathInfo.substring(1)); // Extract user ID from path
-                usersXml = User.getUserById(userId);
             } else {
-                // Invalid path
-                usersXml = "<Error><Message>Invalid request</Message></Error>";
+                String[] pathParts = pathInfo.split("/");
+                if (pathParts.length == 2 && pathParts[1].matches("\\d+")) {
+                    // Get individual user by ID
+                    int userId = Integer.parseInt(pathParts[1]); // Extract user ID from path
+                    usersXml = User.getUserById(userId);
+                } else if (pathParts.length == 3 && pathParts[1].matches("\\d+") && "assignments".equals(pathParts[2])) {
+                    // Get all assignments for a specific user
+                    int userId = Integer.parseInt(pathParts[1]); // Extract user ID from path
+                    boolean onlyActiveBoolean = Boolean.parseBoolean(request.getParameter("onlyActive"));
+                    usersXml = Assignment.getAssignmentsByStudentId(userId, onlyActiveBoolean);
+                } else {
+                    // Invalid path
+                    usersXml = "<Error><Message>Invalid request</Message></Error>";
+                }
             }
             response.getWriter().write(usersXml);
         } catch (SQLException | ClassNotFoundException | ParserConfigurationException e) {
