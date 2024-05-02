@@ -61,11 +61,16 @@
 </head>
 <body>
     <div id="sidebar" class="sidebar">
-        <h2>Select a Chatroom</h2>
+        <h3>Select a Chatroom</h3>
+        <p>Public</p>
 <ul>
-    <li>Room 1</li>
-    <li>Room 2</li>
+    <li>Announcements</li>
+    <li>General</li>
 </ul>
+        <p>Direct Messages</p>
+        <ul>
+            <li></li>
+        </ul>
     </div>
 <div id="content" class="body">
     <div id="messagesDiv">
