@@ -1,6 +1,7 @@
 package com.example.webappproject.servlet;
 
 import com.example.webappproject.dao.User;
+import com.example.webappproject.dao.Assignment;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "getUsers", value = "/api/users/*")
-public class GetUsersServlet extends HttpServlet {
+public class UsersServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/xml;charset=UTF-8");
