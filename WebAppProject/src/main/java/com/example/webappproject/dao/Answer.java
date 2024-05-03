@@ -20,11 +20,10 @@ public class Answer {
         String questionText;
         int assignmentId;
         boolean correctAnswer;
-
-        public AnswerData(String questionText, int assignmentId, boolean correctAnswer) {
+        public AnswerData(String questionText, int assignmentId) {
             this.questionText = questionText;
             this.assignmentId = assignmentId;
-            this.correctAnswer = correctAnswer;
+            this.correctAnswer = false;
         }
     }
 

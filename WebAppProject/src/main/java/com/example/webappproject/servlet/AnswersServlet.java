@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "AnswersServlet", urlPatterns = {"/api/answers"})
@@ -28,14 +30,11 @@ public class AnswersServlet extends HttpServlet {
             JSONObject json = new JSONObject(jsonData);
             ArrayList<Answer.AnswerData> answerList = new ArrayList<>();
 
-            if (json.has("answers") && json.get("answers") instanceof JSONArray) {
-                JSONArray jsonArray = json.getJSONArray("answers");
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    answerList.add(createAnswerDataFromJSON(jsonObject));
-                }
-            } else {
-                answerList.add(createAnswerDataFromJSON(json));
+            Iterator<String> keys = json.keys();
+
+            while(keys.hasNext()) {
+                String key = keys.next();
+                answerList.add(new AnswerData(json.get(key).toString(),Integer.parseInt( key)));
             }
 
             String result = Answer.createAnswers(answerList);
@@ -45,13 +44,5 @@ public class AnswersServlet extends HttpServlet {
         } catch (Exception e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
-    }
-
-    private Answer.AnswerData createAnswerDataFromJSON(JSONObject jsonObject) throws JSONException {
-        String questionText = jsonObject.getString("answerText");
-        int assignmentId = jsonObject.getInt("questionId");
-        boolean correctAnswer = jsonObject.getBoolean("correctAnswer");
-
-        return new Answer.AnswerData(questionText, assignmentId, correctAnswer);
     }
 }
