@@ -25,6 +25,8 @@ public class LoginServlet extends HttpServlet {
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("isLoggedIn", true);
+                session.setAttribute("username", username);
+
                 response.getWriter().write("<LoginResult><Status>Success</Status><Message>Login successful.</Message></LoginResult>");
             }
         } catch (SQLException | ClassNotFoundException | ParserConfigurationException e) {

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="css/style.css">
 <style>
     #assignmentTable {
         font-family: Arial, Helvetica, sans-serif;
@@ -28,18 +29,36 @@
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
-        background-color: #04AA6D;
+        background-color: #007bff;
         color: white;
     }
-    #selectDiv{
+    .selectDiv{
         text-align: center;
+        margin-top:1rem;
     }
 
 </style>
 <html>
 <head>
-    <title>Create Assignment</title>
+    <title>Assignment List</title>
 </head>
+<main>
+    <section class="banner">
+        <h1>Assignment List</h1>
+    </section>
+</main>
+<header>
+    <nav>
+        <ul>
+            <li><a href="courses.jsp">Courses</a></li>
+            <li><a href="teachers.jsp">Teachers</a></li>
+            <li><a href="AssignmentList.jsp">Assignments</a></li>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="register.jsp">Registration</a></li>
+        </ul>
+    </nav>
+</header>
 <script>
 
     function fetchAssignment() {
@@ -48,8 +67,8 @@
             filter(event);
         });
 
-        //REMOVE LATER
-        let userId = 2
+        //Let them know to get the username in api
+        let userId = 0
         const xhr = new XMLHttpRequest();
         xhr.open("GET", `${pageContext.request.contextPath}/api/users/`+ userId +`/assignments`, true);
         xhr.onreadystatechange = function() {
@@ -79,7 +98,7 @@
             const row = document.createElement("tr");
             let btn = document.createElement("a")
             btn.innerText = "View"
-            btn.setAttribute("href","/Assignment?assigment=" + assignment.getElementsByTagName("assignment_id")[0].textContent)
+            btn.setAttribute("href","Assignment.jsp?assigment=" + assignment.getElementsByTagName("assignment_id")[0].textContent)
             const cells = [
                 assignment.getElementsByTagName("assignment_id")[0].textContent,
                 assignment.getElementsByTagName("name")[0].textContent,
@@ -126,16 +145,15 @@
 </script>
 
 <body>
-<h1>Assignments</h1>
 <div class="form-container" id="login-register">
     <!-- Content will be populated by JavaScript -->
 </div>
-<Div id="selectDiv">Filter:
+<div class="selectDiv">Filter:
 <select class=".filter" id="assignment-dropdown">
     <option selected>All</option>
 <option>Available</option>
 </select>
-</Div>
+</div>
 
 <table id="assignmentTable"></table>
 </body>

@@ -5,6 +5,7 @@ import static com.example.webappproject.mysql.ResultSetToXMLConverter.XMLtoStrin
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -88,6 +89,21 @@ public class User {
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, userId);
                 return ResultSetToXMLConverter.executeQueryToXML(pstmt);
+            }
+        }
+    }
+
+    public static int getUserByUserName(String username) throws SQLException, ClassNotFoundException, ParserConfigurationException {
+        try (Connection conn = MySQLConnection.getConnection()) {
+            String sql = "SELECT user_id FROM user WHERE username = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, username);
+                ResultSet rs = pstmt.executeQuery();
+                int userId = 0;
+                while(rs.next()){
+                    userId = rs.getInt("user_id");
+                }
+                return userId;
             }
         }
     }

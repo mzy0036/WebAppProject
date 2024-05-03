@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="css/style.css">
 <style>
     /* Style for the form container */
     .form-container {
@@ -48,13 +49,32 @@
         background-color: #0056b3;
     }
 </style>
+<main>
+    <section class="banner">
+        <h1>Assignment</h1>
+    </section>
+</main>
+<header>
+    <nav>
+        <ul>
+            <li><a href="courses.jsp">Courses</a></li>
+            <li><a href="teachers.jsp">Teachers</a></li>
+            <li><a href="AssignmentList.jsp">Assignments</a></li>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="register.jsp">Registration</a></li>
+        </ul>
+    </nav>
+</header>
 <script>
 
     function fetchAssignment() {
         const form = document.getElementById("AssignmentForm");
         form.addEventListener('submit', handleSubmit);
-        //REMOVE LATER
-        let assId = 1
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const assId = urlParams.get('assigment')
+
         const xhr = new XMLHttpRequest();
         xhr.open("GET", `${pageContext.request.contextPath}/api/assignments/`+ assId +`/questions`, true);
         xhr.onreadystatechange = function() {
@@ -127,11 +147,7 @@
 
 </script>
 <html>
-<head>
-    <title>Assignment</title>
-</head>
 <body>
-<H1>Assignment</H1>
 <form id="AssignmentForm" class="form-container">
 
 </form>
