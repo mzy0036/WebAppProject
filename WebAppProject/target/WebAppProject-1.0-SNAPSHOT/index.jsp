@@ -1,163 +1,92 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Statement"%>
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: notst
+  Date: 5/2/2024
+  Time: 10:45 AM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Library</title>
-    <script type="text/javascript">
-        function validate() {
-            // javascript code to validate user input
-            var str=true;
-            document.getElementById("msg").innerHTML="";
-
-            pwd = document.signupform.password.value;
-            cpwd = document.signupform.confirm.value;
-
-
-            if(pwd == cpwd) {
-
-            }
-            else {
-                document.getElementById("msg").innerHTML="Password and confirm password must match.!";
-                str=false;
-            }
-
-            if(document.signupform.password.value == '')
-            {
-                document.getElementById("msg").innerHTML="Enter Password";
-                str=false;
-            }
-
-            if(document.signupform.username.value == '')
-            {
-                document.getElementById("msg").innerHTML="Enter Username";
-                str=false;
-            }
-
-            lastname = document.signupform.lastname.value;
-            if(isNaN(lastname))
-            {
-            }
-            else
-            {
-                document.getElementById("msg").innerHTML="Numbers are not allowed for last name.!";
-                str=false;
-            }
-
-            if(document.signupform.lastname.value == '')
-            {
-                document.getElementById("msg").innerHTML="Enter Lastname";
-                str=false;
-            }
-
-            firstname = document.signupform.firstname.value;
-            if(isNaN(firstname))
-            {
-            }
-            else
-            {
-                document.getElementById("msg").innerHTML="Numbers are not allowed for first name.!";
-                str=false;
-            }
-
-            if(document.signupform.firstname.value == '')
-            {
-                document.getElementById("msg").innerHTML="Enter Firstname";
-                str=false;
-            }
-
-
-
-            return str;
-        }
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Math Education - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div>
-    <a href="index.jsp">
-        <h1>Login Example</h1>
-    </a>
-</div>
-
-<div>
-    <form name="loginform" method="POST" action="loginprocess.jsp">            <!-- On submit, the page will be redirected to loginprocess.jsp -->
-        <table border="0" cellpadding="5" align="center" width = "800px">
-            <tr>
-                <td colspan="2"><h3>Login</h3></td>
-            </tr>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username" required /></td>                  <!-- name: username -->
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password" required/></td>               <!-- name: password -->
-            </tr>
-            <tr>
-                <td><input type="submit" value="Login" /> </td>
-                <td>
-                    <%
-                        if(request.getParameter("c")!= null) {
-                            //check the value for variable "c"
-                            out.println("Username or password is incorrect.!");
-                        }
-                    %>
-                </td>
-            </tr>
-        </table>
+<main>
+    <section class="banner">
+        <h1>Welcome to Online Math Education for K-12</h1>
+        <p>Explore the World of Math</p>
+    </section>
+</main>
+<header>
+    <nav>
+        <ul>
+            <li><a href="courses.jsp">Courses</a></li>
+            <li><a href="teachers.jsp">Teachers</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="register.jsp">Registration</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="signin-form">
+    <h2>Sign In</h2>
+    <form id="loginForm" action="/api/login" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button id="loginButton" type="submit">Sign In</button>
     </form>
-
-
-    <form name="signupform" method="POST" action="signupprocess.jsp" onSubmit="return validate()">           <!-- On submit, the page will be redirected to signupprocess.jsp -->
-        <table border="0" cellpadding="5" align="center" width = "800px">
-            <tr>
-                <td colspan="2"><h3>Register</h3></td>
-            </tr>
-
-            <tr>
-                <td>First Name:</td>
-                <td><input type="text" name="firstname"  /></td>                 <!-- name: firstname -->
-            </tr>
-
-            <tr>
-                <td>Last Name:</td>
-                <td><input type="text" name="lastname" /></td>                   <!-- name: lastname -->
-            </tr>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username" /></td>                  <!-- name: username -->
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type="password" name="password" /></td>              <!-- name: password -->
-            </tr>
-            <tr>
-                <td>Confirm Password:</td>
-                <td><input type="password" name="confirm" /></td>               <!-- name: confirm -->
-            </tr>
-            <tr>
-                <td><input type="submit" name="signup" value="Sign up" /></td>
-                <td>
-                    <span id="msg"> </span>                                     <!-- span tag to print validation errors -->
-                    <%
-                        if(request.getParameter("a")!= null) {
-                            //check the value for variable "a"
-                            out.println("Username already exists..! Please login to continue.!");
-                        }
-
-                        if(request.getParameter("b")!= null) {
-                            //check the value for variable "b"
-                            out.println("You must login to continue.!");
-                        }
-                    %>
-                </td>
-
-            </tr>
-        </table>
-    </form>
-
 </div>
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Disable the submit button to prevent multiple submissions
+        document.getElementById("loginButton").disabled = true;
+
+        // Get form data
+        var formData = new URLSearchParams(new FormData(document.getElementById("loginForm")));
+
+        // Send form data asynchronously using AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "api/login");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Parse XML response
+                    var xmlDoc = xhr.responseXML;
+                    var status = xmlDoc.getElementsByTagName("Status")[0].textContent;
+
+                    // Handle response based on status
+                    if (status === "Success") {
+                        // Redirect user to a different page upon successful login
+                        alert("Success!");
+                    } else {
+                        // Handle invalid login
+                        alert("Invalid username or password.");
+                        // Enable the submit button
+                        document.getElementById("loginButton").disabled = false;
+                    }
+                } else {
+                    // Handle AJAX error
+                    alert("Error occurred. Please try again later.");
+                    // Enable the submit button
+                    document.getElementById("loginButton").disabled = false;
+                }
+            }
+        };
+        xhr.send(formData);
+    });
+</script>
 </body>
 </html>
