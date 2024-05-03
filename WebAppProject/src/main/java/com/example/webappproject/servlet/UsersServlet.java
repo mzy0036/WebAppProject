@@ -30,6 +30,11 @@ public class UsersServlet extends HttpServlet {
                 } else if (pathParts.length == 3 && pathParts[1].matches("\\d+") && "assignments".equals(pathParts[2])) {
                     // Get all assignments for a specific user
                     int userId = Integer.parseInt(pathParts[1]); // Extract user ID from path
+                    if(userId == 0){
+                        HttpSession session = request.getSession();
+                        String username = session.getAttribute("username").toString();
+                        userId = User.getUserByUserName(username);
+                    }
                     boolean onlyActiveBoolean = Boolean.parseBoolean(request.getParameter("onlyActive"));
                     usersXml = Assignment.getAssignmentsByStudentId(userId, onlyActiveBoolean);
                 } else {

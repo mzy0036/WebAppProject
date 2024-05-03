@@ -25,9 +25,7 @@
     <nav>
         <ul>
             <li><a href="courses.jsp">Courses</a></li>
-            <li><a href="AssignmentList.jsp">Assignments</a></li>
             <li><a href="teachers.jsp">Teachers</a></li>
-            <li><a href="index.jsp">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="register.jsp">Registration</a></li>
         </ul>

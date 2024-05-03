@@ -23,6 +23,10 @@ public class LoginServlet extends HttpServlet {
             if (loginResult.contains("<userCount>0</userCount>")) {
                 response.getWriter().write("<LoginResult><Status>Error</Status><Message>Invalid username or password.</Message></LoginResult>");
             } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("isLoggedIn", true);
+                session.setAttribute("username", username);
+
                 response.getWriter().write("<LoginResult><Status>Success</Status><Message>Login successful.</Message></LoginResult>");
             }
         } catch (SQLException | ClassNotFoundException | ParserConfigurationException e) {
