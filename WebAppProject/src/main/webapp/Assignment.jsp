@@ -63,6 +63,23 @@
         xhr.send();
     }
 
+    function postAnswers(){
+        let answers = document.getElementsByClassName("answer");
+        for(i in answers){
+            let text = answers[i].value
+            let id = answers[i].name
+            debugger;
+            const xhr = new XMLHttpRequest();
+        xhr.open("POST", `${pageContext.request.contextPath}/api/answers?answerText=`+ text +`&question=` + id, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                createFormFromXML(xhr.responseXML);
+            }
+        };
+        xhr.send();
+        }
+    }
+
     function createFormFromXML(xml) {
 
         // Get the <Results> element
@@ -85,7 +102,8 @@
             label.innerHTML = questionText;
             let input = document.createElement("input");
             input.type = "text";
-            input.name = "question_" + questionId;
+            input.name = questionId;
+            input.classList.add("answer")
 
             // Append label and input to form
             form.appendChild(label);
@@ -112,7 +130,7 @@
 </head>
 <body>
 <H1>Assignment</H1>
-<form id="AssignmentForm" class="form-container">
+<form id="AssignmentForm" class="form-container" onsubmit="return postAnswers()">
 
 </form>
 </body>
