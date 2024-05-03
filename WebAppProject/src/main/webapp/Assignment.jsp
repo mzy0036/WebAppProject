@@ -51,6 +51,8 @@
 <script>
 
     function fetchAssignment() {
+        const form = document.getElementById("AssignmentForm");
+        form.addEventListener('submit', handleSubmit);
         //REMOVE LATER
         let assId = 1
         const xhr = new XMLHttpRequest();
@@ -63,14 +65,15 @@
         xhr.send();
     }
 
-    function postAnswers(){
-        let answers = document.getElementsByClassName("answer");
-        for(i in answers){
-            let text = answers[i].value
-            let id = answers[i].name
-            debugger;
-            const xhr = new XMLHttpRequest();
-        xhr.open("POST", `${pageContext.request.contextPath}/api/answers?answerText=`+ text +`&question=` + id, true);
+    function handleSubmit(event){
+        event.preventDefault();
+        const data = new FormData(event.target);
+        const value = Object.fromEntries(data.entries());
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", `${pageContext.request.contextPath}/api/answers`, true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(value));
+
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 createFormFromXML(xhr.responseXML);
@@ -78,7 +81,7 @@
         };
         xhr.send();
         }
-    }
+
 
     function createFormFromXML(xml) {
 
@@ -120,7 +123,6 @@
         // Append form to the document body
         document.body.appendChild(form);
     }
-
     document.addEventListener("DOMContentLoaded", fetchAssignment);
 
 </script>
@@ -130,7 +132,7 @@
 </head>
 <body>
 <H1>Assignment</H1>
-<form id="AssignmentForm" class="form-container" onsubmit="return postAnswers()">
+<form id="AssignmentForm" class="form-container">
 
 </form>
 </body>
