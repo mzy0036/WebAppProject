@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: Edward
-Build-Jdk: 20.0.2
+Built-By: edwardriley
+Build-Jdk: Oracle OpenJDK 22.0.1 - aarch64
 
