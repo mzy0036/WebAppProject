@@ -96,6 +96,7 @@
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                alert("Submissions Submitted");
                 createFormFromXML(xhr.responseXML);
             }
         };
