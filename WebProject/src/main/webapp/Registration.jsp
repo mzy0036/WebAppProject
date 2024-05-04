@@ -41,7 +41,7 @@
 </div>
 
 
-<form class="" action="index.jsp" method="post"
+<form class="" action="RegisterServlet" method="post"
       style="text-align: center; margin-left: auto; background-color: lightblue;">
   <label for="username">Username</label>
   <input id="username" type="text" value="" required><br><br>
@@ -51,9 +51,11 @@
   <input id="password" type="password" name="password" placeholder="Your password" required
          pattern="{6,12}" title="write a 6-12 characters"><br><br>
   <label for="age">Age</label>
-  <input id="age" type="text" name="age" placeholder="Your Email Address" required><br><br>
+  <input id="age" type="text" name="age" placeholder="Your age" ><br><br>
   <label for="address">Address</label>
-  <input id="address" name="address" placeholder="Your address" required>
+  <input id="address" name="address" placeholder="Your address" > <br><br>
+  <input type="submit" value="Register">
+  <a href="login.jsp">Already have Account?</a>
 </form>
 <div class="footer">Copyright © 2024. All Rights Reserved</div>
 </body>

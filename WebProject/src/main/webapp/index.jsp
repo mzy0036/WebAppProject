@@ -85,7 +85,7 @@
     <img src="images/chatroom.png" style="width: 100%; height: 100%; vertical-align:middle;">
     <div style="position:absolute;z-index:2;left:210px;top:40px;font-size:50px;
       color:#AAAAFF;font-family: Marker Felt, fantas">
-        <p>Disscuss with your teacher or classmates</p>
+        <p>Discuss with your teacher or classmates</p>
 
     </div>
 </div>

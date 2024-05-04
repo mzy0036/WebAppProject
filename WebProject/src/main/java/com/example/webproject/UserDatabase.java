@@ -8,14 +8,15 @@ public class UserDatabase {
         this.con = con;
     }
 
-    public boolean savaUser(User user) {
+    public boolean saveUser(User user) {
         boolean set=false;
         try{
-            String query = "insert into General_usr(username,password) values(?,?)";
+            String query = "INSERT INTO General_usr(UserName,Email,Password) values(?,?,?)";
 
             PreparedStatement pt= this.con.prepareStatement(query);
             pt.setString(1, user.getUserName());
-            pt.setString(2, user.getPassword());
+            pt.setString(2, user.getEmail());
+            pt.setString(3, user.getPassword());
 
             pt.executeUpdate();
             set=true;
